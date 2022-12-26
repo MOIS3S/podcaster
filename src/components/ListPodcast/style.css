@@ -1,0 +1,15 @@
+.container-listPodcast{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 150px 10px;
+}
+
+.container-filter-count{
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 150px;
+}
