@@ -1,0 +1,12 @@
+.countFlag{
+  background-color: #3d8bfd;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 5px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
