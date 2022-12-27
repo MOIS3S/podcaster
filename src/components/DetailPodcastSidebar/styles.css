@@ -1,0 +1,34 @@
+.detailPodcastSidebar-img {
+  width: 60%;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.detailPodcastSidebar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.detailPodcastSidebar-subTitle {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 0px;
+  text-align: left;
+}
+
+.detailPodcastSidebar-description{
+  font-weight: 800;
+  margin-bottom: 0px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+}
+
+.detailPodcastSidebar-p{
+  font-weight: 100;
+  font-size: 0.9rem;
+  font-style: italic;
+}

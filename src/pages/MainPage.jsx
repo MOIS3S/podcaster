@@ -2,14 +2,17 @@ import React from 'react'
 import AppFrame from '../components/AppFrame';
 import ListPodcast from '../components/ListPodcast'
 import { useQuery } from 'react-query'
-import getListPodcast from '../service/getListPodcats';
-//import PropTypes from 'prop-types'
+import { getListPodcast } from '../service';
+import { useAppData } from '../context/AppDataProvider';
 
 const timeToReFetchData = 86400000;
 
 function MainPage(props) {
-  const { data, isLoading } = useQuery('podcast', getListPodcast, { cacheTime: timeToReFetchData });
-  console.log("INFO: ", data, isLoading);
+  const { setAllPodcasts  } = useAppData();
+  const { data, isLoading } = useQuery('podcast', getListPodcast, { 
+    cacheTime: timeToReFetchData, onSuccess: (data) => setAllPodcasts(data)
+   });
+  //console.log("INFO: ", data, isLoading);
 
   return (
     <AppFrame loading={isLoading}>
@@ -17,7 +20,5 @@ function MainPage(props) {
     </AppFrame>
   )
 }
-
-//MainPage.propTypes = {}
 
 export default MainPage
