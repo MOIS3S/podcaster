@@ -1,0 +1,13 @@
+.container-detailPodcast{
+  margin-right: 100px;
+  margin-left: 100px;
+  display: flex;
+}
+
+.container-episodes{
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+}
