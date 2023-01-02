@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 function createData(
   name: string,
@@ -55,7 +56,7 @@ export default function TablePodcast({ data }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.trackName}
+                <Link to={`/podcast/${row.collectionId}/episode/${row.trackId}`}>{row.trackName}</Link>
               </TableCell>
               <TableCell>{new Date(row.releaseDate).toLocaleDateString()}</TableCell>
               <TableCell>{convertMS(row.trackTimeMillis)}</TableCell>
