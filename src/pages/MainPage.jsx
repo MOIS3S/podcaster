@@ -5,14 +5,16 @@ import { useQuery } from 'react-query'
 import { getListPodcast } from '../service';
 import { useAppData } from '../context/AppDataProvider';
 
-const timeToReFetchData = 86400000;
 
 function MainPage(props) {
-  const { setAllPodcasts  } = useAppData();
-  const { data, isLoading } = useQuery('podcast', getListPodcast, { 
-    cacheTime: timeToReFetchData, onSuccess: (data) => setAllPodcasts(data)
-   });
-  //console.log("INFO: ", data, isLoading);
+  const { setState, state } = useAppData();
+  const { data, isLoading } = useQuery(
+    'podcast', getListPodcast, 
+    { 
+      refetchInterval: state.timeToReFetchData,
+      onSuccess: (data) => setState((ppr) => ({...{context: {...ppr.context, allPodcasts: data}  } } ))
+    }
+    );
 
   return (
     <AppFrame loading={isLoading}>

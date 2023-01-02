@@ -11,14 +11,29 @@ import TablePodcast from '../../components/TablePodcast';
 import { Grid, Paper, Typography } from '@mui/material';
 
 
-const timeToReFetchData = 86400000;
-
 export default function DetailPodcast() {
   const { podcastId } = useParams()
-  const { allPodcasts } = useAppData();
-  const { feed: { entry }} = allPodcasts;
+  const { state, setState } = useAppData();
+  const episode =  state.context.allDetailPodcast.find(({ id }) => id  === podcastId)
+
+  const { feed: { entry }} = state.context.allPodcasts;
   const infoPodcast = entry.find(item => item.id.attributes['im:id'] === podcastId);
-  const { data, isLoading } = useQuery('podcast-detail', () => getDetailPodcast({ podcastId }), { cacheTime: timeToReFetchData});
+  const { isLoading } = useQuery(
+    'podcast-detail',
+     () => getDetailPodcast({ podcastId }), 
+     { 
+      enabled: !episode,
+      refetchInterval: state.context.timeToReFetchData,
+      onSuccess: (data) => setState((prr) => ({
+        ...{
+          context: {
+            ...prr.context,
+            allDetailPodcast: [...new Set([...state.context.allDetailPodcast, { ...data, id: podcastId }])]
+            }
+          } 
+     }))
+    });
+
 
   return (
     <AppFrame loading={isLoading}>
@@ -30,10 +45,10 @@ export default function DetailPodcast() {
         <Grid item xs={7}>
           <Paper elevation={3} style={{ marginBottom: '40px'}}>
             <div className='container-episodes'>
-            {data && <Typography variant='h5' fontWeight={900}>Episodes: {data.resultCount}</Typography>}
+            {episode && <Typography variant='h5' fontWeight={900}>Episodes: {episode.resultCount}</Typography>}
             </div>
           </Paper>
-          {data && <TablePodcast data={data}/>}
+          {episode && <TablePodcast data={episode}/>}
         </Grid>
       </Grid>
     </AppFrame>
